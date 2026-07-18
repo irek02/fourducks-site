@@ -68,19 +68,35 @@
     <li>Use <strong>Refresh</strong> any time, or turn on daily auto-refresh.</li>
   </ol>
 
+  <h2>Permissions it requests, and why</h2>
+  <p class="muted">Attio for Sheets asks for the minimum access it needs to import your CRM
+    data, and nothing more:</p>
+  <ul>
+    <li><strong>Connect to external services</strong> — so the add-on can sign you in to
+      Attio and fetch your People and Companies from the Attio API.</li>
+    <li><strong>See and edit only the current spreadsheet</strong> — so it can write the
+      imported records into tabs in the spreadsheet you have open. It cannot see or touch any
+      of your other Google Sheets or Drive files.</li>
+    <li><strong>Run on a schedule</strong> — so the optional daily auto-refresh can update
+      your imported data once a day.</li>
+    <li><strong>Display the sidebar</strong> — so the add-on can show its interface inside
+      Google Sheets.</li>
+  </ul>
+
   <div class="card">
     <strong>Your data stays yours.</strong>
     <p class="muted" style="margin:.5rem 0 0;">The add-on stores only your Attio access token
       and your import preferences — all inside your own Google account. There is no external
-      server or database. See the <a href="/attio-sheets/privacy">Privacy Policy</a> for details.</p>
+      server or database, and the add-on is read-only against Attio. See the
+      <a href="https://fourducks.dev/attio-sheets/privacy">Privacy Policy</a> for details.</p>
   </div>
 
   <h2>Support</h2>
   <p>Questions or issues? Email <a href="mailto:support@fourducks.dev">support@fourducks.dev</a>.</p>
 
   <footer>
-    <a href="/attio-sheets/privacy">Privacy Policy</a>
-    <a href="/attio-sheets/terms">Terms of Service</a>
+    <a href="https://fourducks.dev/attio-sheets/privacy">Privacy Policy</a>
+    <a href="https://fourducks.dev/attio-sheets/terms">Terms of Service</a>
     <a href="mailto:support@fourducks.dev">Contact</a>
     <div style="margin-top:1rem;">© 2026 Four Ducks · fourducks.dev</div>
   </footer>
