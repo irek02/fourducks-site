@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attio for Sheets — Four Ducks</title>
+<meta name="description" content="Attio for Sheets is a Google Workspace Add-on that imports People and Companies from your Attio CRM into Google Sheets.">
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5c5c5c; --accent: #2b6cb0;
+    --border: #e6e6e6; --card: #f7f7f8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #16181d; --fg: #e8e8ea; --muted: #a0a4ad; --accent: #7cb0e6;
+            --border: #2a2d35; --card: #1e2128; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  header { display: flex; align-items: center; gap: .75rem; margin-bottom: 2.5rem; }
+  header .logo { font-size: 1.75rem; }
+  header h1 { font-size: 1.25rem; margin: 0; }
+  header .by { display: block; font-size: .85rem; color: var(--muted); text-decoration: none; }
+  header .by:hover { text-decoration: underline; }
+  h2 { font-size: 1.6rem; margin: 2.5rem 0 .75rem; }
+  p { margin: 0 0 1rem; }
+  .lead { font-size: 1.15rem; color: var(--fg); }
+  .muted { color: var(--muted); }
+  ol, ul { padding-left: 1.25rem; }
+  li { margin: .35rem 0; }
+  .card { background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+  a { color: var(--accent); }
+  footer { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: .9rem; }
+  footer a { margin-right: 1.25rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="logo">🦆</span>
+    <div>
+      <h1>Attio for Sheets</h1>
+      <a class="by" href="/">by Four Ducks</a>
+    </div>
+  </header>
+
+  <p class="lead">Attio for Sheets brings your Attio CRM into Google Sheets.</p>
+  <p class="muted">A Google Workspace Add-on by Four Ducks. Connect your Attio account, then
+    import People and Companies straight into a spreadsheet — with one-click refresh and an
+    optional daily auto-sync.</p>
+
+  <h2>What it does</h2>
+  <ul>
+    <li>Connect securely to Attio with OAuth — no copy-pasting API keys.</li>
+    <li>Import People and Companies into named tabs in your active spreadsheet.</li>
+    <li>Refresh on demand, or enable a daily auto-refresh.</li>
+    <li>Read-only against your Attio workspace — the add-on never writes back to Attio.</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol>
+    <li>Install the add-on and open the sidebar in Google Sheets.</li>
+    <li>Click <strong>Connect Attio</strong> and authorize.</li>
+    <li>Pick <strong>People</strong> or <strong>Companies</strong> and click <strong>Import</strong>.</li>
+    <li>Use <strong>Refresh</strong> any time, or turn on daily auto-refresh.</li>
+  </ol>
+
+  <div class="card">
+    <strong>Your data stays yours.</strong>
+    <p class="muted" style="margin:.5rem 0 0;">The add-on stores only your Attio access token
+      and your import preferences — all inside your own Google account. There is no external
+      server or database. See the <a href="/attio-sheets/privacy">Privacy Policy</a> for details.</p>
+  </div>
+
+  <h2>Support</h2>
+  <p>Questions or issues? Email <a href="mailto:support@fourducks.dev">support@fourducks.dev</a>.</p>
+
+  <footer>
+    <a href="/attio-sheets/privacy">Privacy Policy</a>
+    <a href="/attio-sheets/terms">Terms of Service</a>
+    <a href="mailto:support@fourducks.dev">Contact</a>
+    <div style="margin-top:1rem;">© 2026 Four Ducks · fourducks.dev</div>
+  </footer>
+</div>
+</body>
+</html>

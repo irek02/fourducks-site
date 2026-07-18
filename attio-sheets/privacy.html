@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Attio for Sheets</title>
+<meta name="description" content="Privacy Policy for the Attio for Sheets Google Workspace Add-on by Four Ducks.">
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5c5c5c; --accent: #2b6cb0;
+    --border: #e6e6e6; --card: #f7f7f8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #16181d; --fg: #e8e8ea; --muted: #a0a4ad; --accent: #7cb0e6;
+            --border: #2a2d35; --card: #1e2128; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  a { color: var(--accent); }
+  .home { display: inline-block; margin-bottom: 2rem; font-size: .9rem; }
+  h1 { font-size: 1.9rem; margin: 0 0 .5rem; }
+  h2 { font-size: 1.25rem; margin: 2rem 0 .5rem; }
+  p, li { margin: 0 0 .75rem; }
+  .meta { color: var(--muted); font-size: .9rem; margin-bottom: 2rem; }
+  .meta div { margin: .15rem 0; }
+  ul { padding-left: 1.25rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .95rem; }
+  th, td { text-align: left; padding: .5rem .6rem; border: 1px solid var(--border);
+    vertical-align: top; }
+  th { background: var(--card); }
+  code { background: var(--card); padding: .1rem .35rem; border-radius: 4px;
+    font-size: .9em; }
+  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="home" href="/attio-sheets/">← Attio for Sheets</a>
+  <h1>Privacy Policy — Attio for Sheets</h1>
+  <div class="meta">
+    <div><strong>Effective date:</strong> 2026-07-17</div>
+    <div><strong>Last updated:</strong> 2026-07-17</div>
+    <div><strong>Service:</strong> Attio for Sheets (Google Workspace Add-on)</div>
+    <div><strong>Publisher:</strong> Four Ducks / fourducks.dev</div>
+  </div>
+
+  <h2>What we collect</h2>
+  <p>Attio for Sheets stores the minimum data needed to operate:</p>
+  <ul>
+    <li><strong>Your Attio OAuth token</strong> — issued by Attio when you click "Connect
+      Attio." Used to call the Attio API on your behalf to fetch People and Companies records.</li>
+    <li><strong>Last-import preferences</strong> — which object type (People or Companies) you
+      imported most recently, so the sidebar can pre-set the Refresh button for you.</li>
+    <li><strong>Auto-refresh setting</strong> — whether you have enabled the daily trigger.</li>
+  </ul>
+  <p>Nothing else is collected. We do not collect your name, email address, IP address, or any
+    data from your Attio workspace beyond what is written into the spreadsheet you explicitly
+    import into.</p>
+
+  <h2>Where it is stored</h2>
+  <p>All data is stored exclusively on <strong>Google's servers</strong> within your own Google
+    account, using Google's Apps Script storage APIs:</p>
+  <ul>
+    <li>The OAuth token is stored in <strong>User Properties</strong> (per-user, private to your
+      Google account).</li>
+    <li>Import preferences and the auto-refresh flag are stored in <strong>Document
+      Properties</strong> (tied to the specific spreadsheet you are using).</li>
+    <li>Script Properties are used only during the OAuth flow (temporary state token); they are
+      cleared after the callback completes.</li>
+  </ul>
+  <p>We operate no external database, server, or third-party storage. Your Attio token never
+    leaves Google's infrastructure.</p>
+
+  <h2>How we use it</h2>
+  <p>The OAuth token is used solely to make read-only API calls to Attio
+    (<code>POST /v2/objects/people/records/query</code> and
+    <code>/v2/objects/companies/records/query</code>) to retrieve the records you request. We do
+    not write to your Attio workspace, and we request only the minimum Attio scopes needed:
+    Records → Read and Object Configuration → Read.</p>
+
+  <h2>Data sharing</h2>
+  <p>We <strong>do not sell</strong>, share, rent, or disclose your data to any third party,
+    except as required by law. The only external service your token is transmitted to is Attio's
+    own API at <code>api.attio.com</code>, under your instruction when you click Import or Refresh.</p>
+
+  <h2>Google API scopes used</h2>
+  <p>The add-on requests the following Google OAuth scopes:</p>
+  <table>
+    <thead><tr><th>Scope</th><th>Why</th><th>Tier</th></tr></thead>
+    <tbody>
+      <tr><td><code>spreadsheets.currentonly</code></td><td>Write imported CRM rows into the
+        active spreadsheet only</td><td>Non-sensitive</td></tr>
+      <tr><td><code>script.container.ui</code></td><td>Show the add-on's sidebar and menu</td>
+        <td>Non-sensitive</td></tr>
+      <tr><td><code>script.external_request</code></td><td>Call the Attio API via
+        <code>UrlFetchApp</code></td><td>Sensitive</td></tr>
+      <tr><td><code>script.scriptapp</code></td><td>Create/delete the daily auto-refresh
+        trigger</td><td>Sensitive</td></tr>
+    </tbody>
+  </table>
+  <p>No <strong>restricted</strong> Google OAuth scopes are requested — no Gmail, Drive,
+    Contacts, Calendar, or Admin SDK access. The add-on only ever touches the spreadsheet it is
+    installed in.</p>
+
+  <h2>Data retention and deletion</h2>
+  <p>To delete all stored data, click <strong>Disconnect</strong> in the sidebar. This
+    immediately deletes your Attio OAuth token from User Properties. Document Properties (import
+    preferences) are cleared when you uninstall the add-on via Google Workspace settings. No data
+    is retained on our end because we hold none.</p>
+
+  <h2>Children's privacy</h2>
+  <p>This add-on is not directed at children under 13. We do not knowingly collect data from
+    children.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>We will update this page if we change how data is handled. Material changes will be noted
+    with an updated effective date.</p>
+
+  <h2>Contact</h2>
+  <p>Questions or requests: <a href="mailto:support@fourducks.dev">support@fourducks.dev</a></p>
+
+  <footer><a href="/attio-sheets/">Home</a> · <a href="/attio-sheets/terms">Terms of Service</a></footer>
+</div>
+</body>
+</html>
