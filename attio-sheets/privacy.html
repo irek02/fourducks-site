@@ -42,7 +42,7 @@
   <h1>Privacy Policy — Attio for Sheets</h1>
   <div class="meta">
     <div><strong>Effective date:</strong> 2026-07-17</div>
-    <div><strong>Last updated:</strong> 2026-07-17</div>
+    <div><strong>Last updated:</strong> 2026-07-28</div>
     <div><strong>Service:</strong> Attio for Sheets (Google Workspace Add-on)</div>
     <div><strong>Publisher:</strong> Four Ducks / fourducks.dev</div>
   </div>
@@ -94,7 +94,7 @@
       <tr><td><code>spreadsheets.currentonly</code></td><td>Write imported CRM rows into the
         active spreadsheet only</td><td>Non-sensitive</td></tr>
       <tr><td><code>script.container.ui</code></td><td>Show the add-on's sidebar and menu</td>
-        <td>Non-sensitive</td></tr>
+        <td>Sensitive</td></tr>
       <tr><td><code>script.external_request</code></td><td>Call the Attio API via
         <code>UrlFetchApp</code></td><td>Sensitive</td></tr>
       <tr><td><code>script.scriptapp</code></td><td>Create/delete the daily auto-refresh
@@ -104,6 +104,40 @@
   <p>No <strong>restricted</strong> Google OAuth scopes are requested — no Gmail, Drive,
     Contacts, Calendar, or Admin SDK access. The add-on only ever touches the spreadsheet it is
     installed in.</p>
+
+  <h2>How we protect sensitive data</h2>
+  <p>Your Attio OAuth token is the only sensitive data this add-on handles. It is protected by the
+    following mechanisms:</p>
+  <ul>
+    <li><strong>Encryption in transit.</strong> All network calls are made over HTTPS/TLS. The
+      add-on calls <code>api.attio.com</code> exclusively via <code>UrlFetchApp</code> over
+      TLS; plaintext HTTP is never used, and the token is never placed in a URL query string.</li>
+    <li><strong>Encryption at rest.</strong> The token is stored in Apps Script
+      <strong>User Properties</strong>, which Google encrypts at rest on Google-managed
+      infrastructure. We operate no database, server, or third-party storage of our own, so the
+      token exists in no other location.</li>
+    <li><strong>Access control and isolation.</strong> User Properties are scoped to the
+      individual Google account that authorized the add-on. No other user of the add-on, and no
+      employee or contractor of Four Ducks, can read your token — we have no administrative
+      interface, export path, or backend that can access it. Document Properties are similarly
+      scoped to the single spreadsheet they belong to.</li>
+    <li><strong>No logging of secrets.</strong> The token is never written to logs, error reports,
+      or Cloud Logging / Stackdriver exception traces. Failed API calls record the HTTP status
+      code and message only, never credentials or record contents.</li>
+    <li><strong>Least privilege.</strong> The token is requested with the narrowest Attio scopes
+      that support the feature set (Records → Read, Object Configuration → Read), so it cannot be
+      used to modify or delete anything in your Attio workspace even if it were exposed.</li>
+    <li><strong>No transfer to third parties.</strong> The token is transmitted only to Attio's own
+      API, the service that issued it. It is sent to no analytics, monitoring, or advertising
+      provider, and it never leaves Google and Attio infrastructure.</li>
+    <li><strong>Revocation.</strong> You can destroy the stored token at any time with the
+      <strong>Disconnect</strong> button in the sidebar, and you can independently revoke the
+      add-on's access from your Attio account settings.</li>
+  </ul>
+  <p>Because we hold no contact details for users, we cannot notify you directly by email. If we
+    ever become aware of a breach affecting user credentials, we will publish a notice on this
+    page and on the add-on's listing, advise users to disconnect and re-authorize, and inform the
+    relevant supervisory authority where required, without undue delay.</p>
 
   <h2>Data retention and deletion</h2>
   <p>To delete all stored data, click <strong>Disconnect</strong> in the sidebar. This
