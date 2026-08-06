@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation — Attio for Sheets</title>
+<meta name="description" content="How to install, connect, and use Attio for Sheets: import People and Companies from your Attio CRM into Google Sheets, refresh on demand, and schedule a daily sync.">
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5c5c5c; --accent: #2b6cb0;
+    --border: #e6e6e6; --card: #f7f7f8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #16181d; --fg: #e8e8ea; --muted: #a0a4ad; --accent: #7cb0e6;
+            --border: #2a2d35; --card: #1e2128; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  header { display: flex; align-items: center; gap: .75rem; margin-bottom: 2.5rem; }
+  header .logo { font-size: 1.75rem; }
+  header h1 { font-size: 1.25rem; margin: 0; }
+  header .by { display: block; font-size: .85rem; color: var(--muted); text-decoration: none; }
+  header .by:hover { text-decoration: underline; }
+  h2 { font-size: 1.6rem; margin: 2.5rem 0 .75rem; }
+  h3 { font-size: 1.1rem; margin: 1.75rem 0 .5rem; }
+  p { margin: 0 0 1rem; }
+  .lead { font-size: 1.15rem; color: var(--fg); }
+  .muted { color: var(--muted); }
+  ol, ul { padding-left: 1.25rem; }
+  li { margin: .35rem 0; }
+  .card { background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+  a { color: var(--accent); }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+    padding: .7rem 1.25rem; border-radius: 8px; font-weight: 600; margin: .5rem 0 1rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .95rem;
+    display: block; overflow-x: auto; }
+  th, td { text-align: left; padding: .55rem .75rem; border-bottom: 1px solid var(--border); }
+  th { font-weight: 600; }
+  nav.toc { margin: 0 0 2rem; }
+  nav.toc a { margin-right: 1rem; white-space: nowrap; font-size: .95rem; }
+  footer { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: .9rem; }
+  footer a { margin-right: 1.25rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="logo">🦆</span>
+    <div>
+      <h1>Attio for Sheets</h1>
+      <a class="by" href="/attio-sheets/">Documentation</a>
+    </div>
+  </header>
+
+  <p class="lead">Everything you need to get your Attio CRM data into Google Sheets.</p>
+
+  <nav class="toc">
+    <a href="#install">Install</a>
+    <a href="#connect">Connect</a>
+    <a href="#import">Import</a>
+    <a href="#refresh">Refresh</a>
+    <a href="#fields">Fields</a>
+    <a href="#limits">Limits</a>
+    <a href="#troubleshooting">Troubleshooting</a>
+    <a href="#privacy">Data &amp; privacy</a>
+  </nav>
+
+  <h2 id="install">Installing the add-on</h2>
+  <p>Attio for Sheets is distributed through the Google Workspace Marketplace.</p>
+  <a class="btn" href="https://workspace.google.com/marketplace/app/attio_for_sheets/119909987048">Install from the Google Workspace Marketplace</a>
+  <ol>
+    <li>Click <strong>Install</strong> on the Marketplace listing and choose the Google account
+      you use with Google Sheets.</li>
+    <li>Review the permissions and approve. (These are explained on the
+      <a href="/attio-sheets/">home page</a> — the add-on only ever touches the one spreadsheet
+      you have open.)</li>
+    <li>Open any Google Spreadsheet. The add-on appears under
+      <strong>Extensions → Attio for Sheets</strong>, and its icon appears in the right-hand
+      sidebar rail.</li>
+  </ol>
+  <p class="muted">You need edit access to the spreadsheet you want to import into. If your
+    organisation restricts Marketplace installs, a Workspace admin may need to approve the
+    add-on for your domain.</p>
+
+  <h2 id="connect">Connecting your Attio account</h2>
+  <ol>
+    <li>Open the sidebar: <strong>Extensions → Attio for Sheets → Open sidebar</strong>, or
+      click the add-on icon in the right-hand rail and then <strong>Open Attio for Sheets</strong>.</li>
+    <li>Click <strong>Connect Attio</strong>. A new tab opens Attio's authorisation screen.</li>
+    <li>Sign in to Attio if you aren't already, pick the workspace you want to read from, and
+      click <strong>Authorize</strong>.</li>
+    <li>Close that tab and return to your spreadsheet. The sidebar's status dot turns green and
+      reads <strong>Connected</strong>.</li>
+  </ol>
+  <p>The add-on requests two read-only Attio scopes — <strong>Records: Read</strong> and
+    <strong>Object Configuration: Read</strong>. It cannot create, edit, or delete anything in
+    your Attio workspace.</p>
+
+  <h2 id="import">Importing People and Companies</h2>
+  <ol>
+    <li>In the sidebar, choose <strong>People</strong> or <strong>Companies</strong>.</li>
+    <li>Click <strong>Import</strong>.</li>
+    <li>The add-on creates (or replaces the contents of) a tab named <strong>Attio People</strong>
+      or <strong>Attio Companies</strong> in the spreadsheet you have open, writes a header row,
+      and fills in your records.</li>
+  </ol>
+  <p class="muted">Importing replaces the whole contents of that tab, so don't keep your own
+    edits or formulas there — put any analysis on a separate tab and reference the imported
+    tab from it. Your other tabs are never touched.</p>
+
+  <h2 id="refresh">Refreshing your data</h2>
+  <h3>On demand</h3>
+  <p>Once you've imported at least once, the sidebar shows a <strong>Refresh data</strong>
+    button. It re-runs your most recent import — same object, same destination tab — with the
+    latest data from Attio.</p>
+  <h3>Daily auto-refresh</h3>
+  <p>Tick <strong>Auto-refresh daily</strong> and the add-on re-runs that same import once a day
+    on a schedule, so the sheet is current when you open it. Untick it to stop. Both the
+    refresh target and the toggle are remembered inside the spreadsheet itself, so they survive
+    closing and reopening it, and they travel with the file if you copy it.</p>
+
+  <h2 id="fields">What gets imported</h2>
+  <table>
+    <tr><th>Object</th><th>Columns</th></tr>
+    <tr><td><strong>People</strong></td><td>Name, Email, Job title, Phone</td></tr>
+    <tr><td><strong>Companies</strong></td><td>Name, Domain, Description, Categories, Employee range</td></tr>
+  </table>
+  <p class="muted">Blank cells mean the record has no value for that attribute in Attio — the
+    add-on writes exactly what your workspace holds. Custom attributes aren't imported yet;
+    if that's what you need, <a href="mailto:support@fourducks.dev">tell us</a> — it's the most
+    likely next feature.</p>
+
+  <h2 id="limits">Plans and limits</h2>
+  <p><strong>Free:</strong> up to 100 rows per object type per import, all fields included, no
+    payment required.</p>
+  <p><strong>Paid (coming soon):</strong> unlimited rows plus daily auto-refresh.</p>
+  <p class="muted">If an import stops at 100 rows, that's the free-tier cap, not an error.</p>
+
+  <h2 id="troubleshooting">Troubleshooting</h2>
+
+  <h3>Attio warns that the app isn't approved</h3>
+  <p>During the connect step Attio may show a notice that Attio for Sheets hasn't been reviewed
+    by Attio yet. Authorising through it works normally. Our Attio App Store submission is in
+    progress and this notice goes away once it's approved.</p>
+
+  <h3>The sidebar says it can't check the connection</h3>
+  <p>Reload the spreadsheet and reopen the sidebar. If it persists, disconnect and connect
+    again. Still stuck? Email us — include the exact message.</p>
+
+  <h3>The import is empty or missing records</h3>
+  <p>Check that you authorised the Attio workspace that actually holds the records, and that
+    your Attio user can see them. The add-on can only read what your own Attio account can
+    read. Also check the 100-row free-tier cap above.</p>
+
+  <h3>Auto-refresh doesn't seem to run</h3>
+  <p>The daily refresh runs on Google's schedule, not at a fixed time, so give it a full day.
+    Confirm the toggle is still ticked and that you're still connected — if the Attio
+    authorisation was revoked, the scheduled run can't fetch anything.</p>
+
+  <h3>Disconnecting</h3>
+  <p>Click <strong>Disconnect</strong> in the sidebar. Your stored Attio token is deleted
+    immediately from your Google account. Data already written to your sheets stays where it
+    is — it's yours. To remove the add-on entirely, use
+    <strong>Extensions → Add-ons → Manage add-ons</strong> in Google Sheets.</p>
+
+  <h2 id="privacy">Data and privacy</h2>
+  <div class="card">
+    <strong>There is no Four Ducks server.</strong>
+    <p class="muted" style="margin:.5rem 0 0;">Your Attio access token is stored in your own
+      Google account's add-on storage, and your import preferences are stored inside the
+      spreadsheet. Attio data flows directly from Attio's API into your spreadsheet — it is
+      never sent to, logged by, or stored on any server of ours, and it is never sold or shared.
+      Full details in the <a href="/attio-sheets/privacy">Privacy Policy</a>.</p>
+  </div>
+
+  <h2>Still need help?</h2>
+  <p>Email <a href="mailto:support@fourducks.dev">support@fourducks.dev</a>. Including your
+    spreadsheet's URL, what you clicked, and any error text gets you a faster answer.</p>
+
+  <footer>
+    <a href="/attio-sheets/">Home</a>
+    <a href="/attio-sheets/privacy">Privacy Policy</a>
+    <a href="/attio-sheets/terms">Terms of Service</a>
+    <a href="mailto:support@fourducks.dev">Contact</a>
+    <div style="margin-top:1rem;">© 2026 Four Ducks · fourducks.dev</div>
+  </footer>
+</div>
+</body>
+</html>
