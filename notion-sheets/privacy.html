@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Notion Sync for Sheets</title>
+<meta name="description" content="Privacy Policy for the Notion Sync for Sheets Google Workspace Add-on by Four Ducks.">
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5c5c5c; --accent: #2b6cb0;
+    --border: #e6e6e6; --card: #f7f7f8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #16181d; --fg: #e8e8ea; --muted: #a0a4ad; --accent: #7cb0e6;
+            --border: #2a2d35; --card: #1e2128; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  a { color: var(--accent); }
+  .home { display: inline-block; margin-bottom: 2rem; font-size: .9rem; }
+  h1 { font-size: 1.9rem; margin: 0 0 .5rem; }
+  h2 { font-size: 1.25rem; margin: 2rem 0 .5rem; }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 .4rem; }
+  p, li { margin: 0 0 .75rem; }
+  .meta { color: var(--muted); font-size: .9rem; margin-bottom: 2rem; }
+  .meta div { margin: .15rem 0; }
+  ul { padding-left: 1.25rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .95rem; }
+  th, td { text-align: left; padding: .5rem .6rem; border: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--card); }
+  code { background: var(--card); padding: .1rem .35rem; border-radius: 4px; font-size: .9em; }
+  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="home" href="/notion-sync/">&#8592; Notion Sync for Sheets</a>
+  <h1>Privacy Policy &#8212; Notion Sync for Sheets</h1>
+  <div class="meta">
+    <div><strong>Effective date:</strong> 2026-08-29</div>
+    <div><strong>Last updated:</strong> 2026-08-29</div>
+    <div><strong>Service:</strong> Notion Sync for Sheets (Google Workspace Add-on)</div>
+    <div><strong>Publisher:</strong> Four Ducks / fourducks.dev</div>
+  </div>
+
+  <h2>What this add-on does with your data</h2>
+  <p>Notion Sync for Sheets keeps a Notion database and a Google Sheets tab in sync in both
+    directions. To do that it reads and writes your Notion pages and your spreadsheet cells.
+    This policy explains exactly what is stored where, and what (if anything) leaves your
+    Google account.</p>
+
+  <h2>Data stored in your Google account</h2>
+  <p>The following is stored exclusively in Google's infrastructure within your own account,
+    using Apps Script storage APIs. It never passes through Four Ducks servers.</p>
+  <ul>
+    <li><strong>Notion OAuth access token</strong> &#8212; issued by Notion when you click
+      "Connect Notion." Stored in <em>User Properties</em> (per-user, private to your Google
+      account). Used to call the Notion API on your behalf.</li>
+    <li><strong>Notion workspace name</strong> &#8212; stored in <em>User Properties</em>
+      alongside the token. Used only to display which workspace is connected.</li>
+    <li><strong>License key</strong> &#8212; if you have purchased a paid license, the key you
+      enter is stored in <em>User Properties</em>. It is sent to Gumroad's API to validate your
+      subscription (see "Third-party services" below).</li>
+    <li><strong>Link state per sheet</strong> &#8212; stored in <em>Document Properties</em>
+      (tied to the specific spreadsheet). Contains: the linked Notion database ID and title, the
+      names and Notion property types of each column (not the values), the last-sync timestamp,
+      and a pagination resume cursor if a sync was interrupted. No Notion page content is here.</li>
+    <li><strong>Sync log</strong> &#8212; stored in a hidden sheet named <code>_syncLog</code>
+      inside your spreadsheet. Each entry records: timestamp, sync direction
+      (<code>notion&#8594;sheets</code> or <code>sheets&#8594;notion</code>), number of rows
+      changed, number of conflicts, number of skips, and any error notes. No cell values or Notion
+      page content are written to the sync log. The log auto-trims to 500 entries.</li>
+    <li><strong>Last-seen values</strong> &#8212; stored in a hidden sheet named
+      <code>_lastSeen</code> inside your spreadsheet. Contains a snapshot of the last-synced
+      property values per Notion page, used to detect which fields changed on each side since
+      the last pass (conflict detection). This data mirrors what is already in your spreadsheet
+      and stays within your own Google account.</li>
+    <li><strong>First-sync completion marker</strong> &#8212; a flag stored in <em>Document
+      Properties</em>, set once when the first sync completes. Prevents re-sending the
+      first-sync event on subsequent passes.</li>
+  </ul>
+
+  <h2>Data sent to Notion</h2>
+  <p>When the add-on syncs, it calls <code>api.notion.com</code> using your OAuth token.
+    These calls include:</p>
+  <ul>
+    <li>Queries for pages changed since the last pass (Notion &#8594; Sheets direction).</li>
+    <li>Property updates for rows you have edited in Sheets (Sheets &#8594; Notion direction).</li>
+    <li>Page creation or archival when rows are added or deleted in Sheets.</li>
+  </ul>
+  <p>Notion's own <a href="https://www.notion.so/privacy">Privacy Policy</a> governs data
+    transmitted to their API.</p>
+
+  <h2>Data sent to Four Ducks servers</h2>
+  <p>Two features transmit a small amount of data to servers operated by Four Ducks.
+    <strong>No cell values and no Notion page content are ever included.</strong></p>
+
+  <h3>Activation events (automatic, no PII)</h3>
+  <p>When certain milestones are reached, the add-on sends a minimal event to a Four Ducks
+    endpoint. Each event payload contains only:</p>
+  <ul>
+    <li><strong>Event type</strong> &#8212; one of: <code>sidebar_opened</code>,
+      <code>notion_connected</code>, <code>database_linked</code>,
+      <code>first_sync_completed</code>.</li>
+    <li><strong>Add-on version</strong> &#8212; a version string (e.g. <code>1.0.0</code>).</li>
+  </ul>
+  <p>No user identity, no Google account identifier, no spreadsheet content, and no Notion data
+    are included. This feature is used to measure adoption milestones. It cannot be individually
+    disabled, but it contains no information that can identify you.</p>
+
+  <h3>In-product feedback (user-initiated)</h3>
+  <p>When you click <strong>Send feedback</strong> in the sidebar and submit a message, the
+    following is sent:</p>
+  <ul>
+    <li>Your typed feedback message.</li>
+    <li>Add-on version.</li>
+  </ul>
+  <p>If you check <strong>Include diagnostic context</strong> (checked by default), the following
+    is also included:</p>
+  <ul>
+    <li><strong>Column names and Notion property types</strong> &#8212; the names of the columns
+      in your linked sheet and each column's Notion property type (e.g. <code>text</code>,
+      <code>number</code>, <code>select</code>). Property <em>values</em> are not included.</li>
+    <li><strong>Last 5 sync log entries</strong> &#8212; timestamp, sync direction, rows changed,
+      conflict count, skip count, and any error notes. No cell values are included.</li>
+  </ul>
+  <p>Uncheck <strong>Include diagnostic context</strong> before submitting to exclude the
+    additional diagnostic information.</p>
+
+  <h2>Google API scopes used</h2>
+  <p>The add-on requests the following Google OAuth scopes:</p>
+  <table>
+    <thead><tr><th>Scope</th><th>Why</th><th>Tier</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>spreadsheets.currentonly</code></td>
+        <td>Read and write rows in the active spreadsheet for sync; create hidden helper sheets
+          (<code>_syncLog</code>, <code>_lastSeen</code>)</td>
+        <td>Non-sensitive</td>
+      </tr>
+      <tr>
+        <td><code>script.container.ui</code></td>
+        <td>Show the add-on sidebar and Extensions menu items</td>
+        <td>Sensitive</td>
+      </tr>
+      <tr>
+        <td><code>script.external_request</code></td>
+        <td>Call the Notion API and Four Ducks feedback/activation endpoints via
+          <code>UrlFetchApp</code></td>
+        <td>Sensitive</td>
+      </tr>
+      <tr>
+        <td><code>script.scriptapp</code></td>
+        <td>Create and delete the scheduled sync trigger and the installable
+          <code>onEdit</code>/<code>onChange</code> triggers</td>
+        <td>Sensitive</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>No <strong>restricted</strong> Google OAuth scopes are requested &#8212; no Gmail, Drive,
+    Contacts, Calendar, or Admin SDK access. The add-on only ever touches the spreadsheet it is
+    installed in.</p>
+
+  <h2>Third-party services</h2>
+  <ul>
+    <li><strong>Notion (api.notion.com)</strong> &#8212; all sync operations. Notion's
+      <a href="https://www.notion.so/privacy">Privacy Policy</a> applies.</li>
+    <li><strong>Gumroad</strong> &#8212; license key validation. When you enter a license key,
+      it is sent to Gumroad's validation API to confirm your subscription is active. Gumroad's
+      own privacy policy governs that transaction. The validation result is cached in your User
+      Properties for one hour to limit API calls.</li>
+  </ul>
+
+  <h2>How we protect your Notion token</h2>
+  <ul>
+    <li><strong>Encryption in transit.</strong> All API calls are made over HTTPS/TLS. The token
+      is never placed in a URL query string.</li>
+    <li><strong>Encryption at rest.</strong> The token is stored in Apps Script User Properties,
+      which Google encrypts at rest on Google-managed infrastructure.</li>
+    <li><strong>Access control.</strong> User Properties are scoped to the individual Google
+      account that authorized the add-on. No other user, and no employee or contractor of Four
+      Ducks, can access your token &#8212; there is no backend that holds it.</li>
+    <li><strong>No logging of secrets.</strong> The token is never written to error logs or
+      Stackdriver traces.</li>
+    <li><strong>No transfer to Four Ducks.</strong> The token is sent only to Notion's API,
+      never to Four Ducks infrastructure.</li>
+  </ul>
+
+  <h2>Data retention and deletion</h2>
+  <p>To stop syncing and remove stored data:</p>
+  <ul>
+    <li>Click <strong>Unlink</strong> in the sidebar to remove the link state for a sheet (sheet
+      rows are left intact).</li>
+    <li>Click <strong>Disconnect Notion</strong> to delete your Notion OAuth token from User
+      Properties.</li>
+    <li>Uninstall the add-on via Google Workspace settings to clear all Document Properties (link
+      state, sync log, last-seen values, first-sync marker) tied to the spreadsheet.</li>
+  </ul>
+  <p>Four Ducks retains no data on its own servers because the add-on holds none there. Feedback
+    messages submitted via the in-product form are retained only as long as needed to address the
+    support request, then deleted.</p>
+
+  <h2>Children's privacy</h2>
+  <p>This add-on is not directed at children under 13. We do not knowingly collect data from
+    children.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>We will update this page if we change how data is handled. Material changes will be noted
+    with an updated effective date. Because we hold no contact details for users, we cannot
+    notify you by email; the updated date on this page is the notice.</p>
+
+  <h2>Contact</h2>
+  <p>Questions or requests:
+    <a href="mailto:support@fourducks.dev">support@fourducks.dev</a></p>
+
+  <footer>
+    <a href="/notion-sync/">Home</a> &#183;
+    <a href="/notion-sync/terms">Terms of Service</a>
+  </footer>
+</div>
+</body>
+</html>
