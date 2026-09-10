@@ -37,11 +37,11 @@
 </head>
 <body>
 <div class="wrap">
-  <a class="home" href="/notion-sync/">&#8592; Notion Sync for Sheets</a>
+  <a class="home" href="/notion-sheets/">&#8592; Notion Sync for Sheets</a>
   <h1>Privacy Policy &#8212; Notion Sync for Sheets</h1>
   <div class="meta">
     <div><strong>Effective date:</strong> 2026-08-29</div>
-    <div><strong>Last updated:</strong> 2026-08-29</div>
+    <div><strong>Last updated:</strong> 2026-09-10</div>
     <div><strong>Service:</strong> Notion Sync for Sheets (Google Workspace Add-on)</div>
     <div><strong>Publisher:</strong> Four Ducks / fourducks.dev</div>
   </div>
@@ -164,6 +164,72 @@
     Contacts, Calendar, or Admin SDK access. The add-on only ever touches the spreadsheet it is
     installed in.</p>
 
+  <h2>Sharing, transfer, and disclosure of Google user data</h2>
+  <p>This section states, explicitly, with whom Google user data obtained through Google
+    Workspace APIs is shared, transferred, or disclosed. "Google user data" here means the
+    spreadsheet content the add-on reads or writes under the
+    <code>spreadsheets.currentonly</code> scope, plus your Google account's authorization state.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Recipient</th>
+        <th>Google user data shared</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Notion Labs, Inc.</strong> (<code>api.notion.com</code>)</td>
+        <td>Cell values from the rows and columns of the sheet you explicitly linked, sent as
+          Notion page property updates in the Sheets &#8594; Notion direction, together with the
+          column names of that sheet. Only the linked sheet is read; no other tab, spreadsheet,
+          or file is ever accessed.</td>
+        <td>To perform the sync you requested &#8212; the core function of the add-on. Transfer
+          happens only after you connect your Notion account and link a specific sheet, and only
+          for that sheet. Governed by
+          <a href="https://www.notion.so/privacy">Notion's Privacy Policy</a>.</td>
+      </tr>
+      <tr>
+        <td><strong>Gumroad, Inc.</strong></td>
+        <td>None. Only the license key you type in is sent. No spreadsheet content, no Google
+          account identifier, no email address.</td>
+        <td>Subscription validation.</td>
+      </tr>
+      <tr>
+        <td><strong>Four Ducks</strong> (the publisher)</td>
+        <td>No cell values and no Google account identifiers. Activation events carry only an
+          event name and add-on version. If you choose to attach diagnostic context to a feedback
+          message, that context includes your linked sheet's column names and Notion property
+          types and the last 5 sync log entries &#8212; never cell values.</td>
+        <td>Product analytics and support, both described in the sections above.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Beyond the recipients listed above, Four Ducks does <strong>not</strong> share, transfer,
+    sell, rent, trade, or otherwise disclose Google user data to any third party. Specifically:</p>
+  <ul>
+    <li><strong>No sale or advertising.</strong> Google user data is never sold, and never used
+      for advertising, retargeting, or building advertising profiles.</li>
+    <li><strong>No data brokers, resellers, or affiliates.</strong> There are none.</li>
+    <li><strong>No subprocessors or hosting providers holding your content.</strong> The add-on
+      runs entirely inside Google Apps Script on your Google account. Four Ducks operates no
+      server that receives, stores, or processes your spreadsheet content.</li>
+    <li><strong>No human access.</strong> No employee or contractor of Four Ducks can read your
+      spreadsheet content, your Notion content, or your OAuth tokens.</li>
+    <li><strong>Legal disclosure.</strong> Four Ducks holds no Google user data and therefore has
+      nothing to produce in response to a subpoena, court order, or other legal process. Should
+      that ever change, this policy will be updated before any such data is collected.</li>
+    <li><strong>Business transfers.</strong> If Four Ducks is acquired or merged, no Google user
+      data would transfer, because none is held.</li>
+  </ul>
+
+  <h2>AI and machine-learning model training</h2>
+  <p>Google user data obtained through Google Workspace APIs is <strong>not</strong> used to
+    develop, improve, or train generalized or non-personalized artificial intelligence or machine
+    learning models. It is not transferred to any third party for that purpose, and no such model
+    is used to process it. The add-on performs deterministic field-by-field synchronization only;
+    it contains no AI or ML component.</p>
+
   <h2>Third-party services</h2>
   <ul>
     <li><strong>Notion (api.notion.com)</strong> &#8212; all sync operations. Notion's
@@ -217,8 +283,8 @@
     <a href="mailto:support@fourducks.dev">support@fourducks.dev</a></p>
 
   <footer>
-    <a href="/notion-sync/">Home</a> &#183;
-    <a href="/notion-sync/terms">Terms of Service</a>
+    <a href="/notion-sheets/">Home</a> &#183;
+    <a href="/notion-sheets/terms">Terms of Service</a>
   </footer>
 </div>
 </body>
